@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - LFAdminCoreProject</title>
+    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" />*@
+    <link rel="stylesheet" href="~/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="~/layuiadmin/style/admin.css" media="all">
+</head>
+<body class="layui-layout-body">
+    <script src="~/layuiadmin/layui/layui.js"></script>
+
+    @RenderBody() 
+
+
+    @*@RenderSection("Scripts", required: false)*@
+
+    <script>
+        ////由于模块都一次性加载，因此不用执行 layui.use() 来加载对应模块，直接使用即可：
+        //; !function () {
+        //    var layer = layui.layer
+        //        , form = layui.form;
+        //    //layer.msg('Hello World');
+        //}();
+
+        layui.config({
+          base: '../layuiadmin/' //你存放新模块的目录，注意，不是layui的模块目录
+        }).extend({
+            index: 'lib/index' //主入口模块
+        }).use('index');
+
+    </script>
+</body>
+
+
+</html>
