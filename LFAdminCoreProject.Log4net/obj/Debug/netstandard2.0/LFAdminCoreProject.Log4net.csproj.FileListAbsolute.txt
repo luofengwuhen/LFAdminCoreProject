@@ -1,0 +1,6 @@
+H:\1.精工\LFAdminCoreProject\LFAdminCoreProject.Log4net\obj\Debug\netstandard2.0\LFAdminCoreProject.Log4net.csprojAssemblyReference.cache
+H:\1.精工\LFAdminCoreProject\LFAdminCoreProject.Log4net\obj\Debug\netstandard2.0\LFAdminCoreProject.Log4net.AssemblyInfoInputs.cache
+H:\1.精工\LFAdminCoreProject\LFAdminCoreProject.Log4net\obj\Debug\netstandard2.0\LFAdminCoreProject.Log4net.AssemblyInfo.cs
+H:\1.精工\LFAdminCoreProject\LFAdminCoreProject.Log4net\bin\Debug\netstandard2.0\log4net.config
+H:\1.精工\LFAdminCoreProject\LFAdminCoreProject.Log4net\bin\Debug\netstandard2.0\LFAdminCoreProject.Log4net.deps.json
+H:\1.精工\LFAdminCoreProject\LFAdminCoreProject.Log4net\bin\Debug\netstandard2.0\LFAdminCoreProject.Log4net.dll

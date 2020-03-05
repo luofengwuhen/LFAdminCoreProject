@@ -1,0 +1,11 @@
+H:\1.精工\LFAdminCoreProject\LFAdminCoreProject.Models\bin\Debug\netcoreapp3.1\LFAdminCoreProject.Models.exe
+H:\1.精工\LFAdminCoreProject\LFAdminCoreProject.Models\bin\Debug\netcoreapp3.1\LFAdminCoreProject.Models.deps.json
+H:\1.精工\LFAdminCoreProject\LFAdminCoreProject.Models\bin\Debug\netcoreapp3.1\LFAdminCoreProject.Models.runtimeconfig.json
+H:\1.精工\LFAdminCoreProject\LFAdminCoreProject.Models\bin\Debug\netcoreapp3.1\LFAdminCoreProject.Models.runtimeconfig.dev.json
+H:\1.精工\LFAdminCoreProject\LFAdminCoreProject.Models\bin\Debug\netcoreapp3.1\LFAdminCoreProject.Models.dll
+H:\1.精工\LFAdminCoreProject\LFAdminCoreProject.Models\bin\Debug\netcoreapp3.1\LFAdminCoreProject.Models.pdb
+H:\1.精工\LFAdminCoreProject\LFAdminCoreProject.Models\obj\Debug\netcoreapp3.1\LFAdminCoreProject.Models.csprojAssemblyReference.cache
+H:\1.精工\LFAdminCoreProject\LFAdminCoreProject.Models\obj\Debug\netcoreapp3.1\LFAdminCoreProject.Models.AssemblyInfoInputs.cache
+H:\1.精工\LFAdminCoreProject\LFAdminCoreProject.Models\obj\Debug\netcoreapp3.1\LFAdminCoreProject.Models.AssemblyInfo.cs
+H:\1.精工\LFAdminCoreProject\LFAdminCoreProject.Models\obj\Debug\netcoreapp3.1\LFAdminCoreProject.Models.dll
+H:\1.精工\LFAdminCoreProject\LFAdminCoreProject.Models\obj\Debug\netcoreapp3.1\LFAdminCoreProject.Models.pdb

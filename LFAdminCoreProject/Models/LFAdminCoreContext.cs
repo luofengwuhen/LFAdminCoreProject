@@ -10,11 +10,11 @@ namespace LFAdminCoreProject.Models
     {
         private readonly IConfiguration configuration;
 
-        public LFAdminCoreContext( )
-        { 
+        public LFAdminCoreContext()
+        {
         }
         public LFAdminCoreContext(IConfiguration Configuration)
-        { 
+        {
             configuration = Configuration;
         }
         public LFAdminCoreContext(DbContextOptions<LFAdminCoreContext> options)
@@ -34,8 +34,8 @@ namespace LFAdminCoreProject.Models
             {
                 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 //                optionsBuilder.UseSqlServer("Data Source=DESKTOP-B1B83D0\\MSSQLSERVER2;Initial Catalog=LFAdminCore;persist security info=True;user id=sa;password=Yujie123;");
-
-                optionsBuilder.UseSqlServer(Startup.LFAdminCoreContextConnectionStr);
+                //optionsBuilder.UseSqlServer(configuration.GetConnectionString("LFAdminCoreContextConnectionStrRead")); //需要注入才能使用
+                optionsBuilder.UseSqlServer(Startup.LFAdminCoreContextConnectionStr);//读取配置文件
             }
         }
 

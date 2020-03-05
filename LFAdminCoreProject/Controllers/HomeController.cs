@@ -6,23 +6,33 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using LFAdminCoreProject.Models;
+using System.Xml;
+using System.Reflection;
 
 namespace LFAdminCoreProject.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        //private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        //private static readonly log4net.ILog log =log4net.LogManager.GetLogger(typeof(Program));
+
+
+        public HomeController()
         {
-            _logger = logger;
+          
         }
 
         public IActionResult Index()
         {
+            Utility.Log4netHelper.Info("这是一条测试 Infomation");
+
+            Utility.Log4netHelper.Error("这是一条测试 Error");
+
             using (LFAdminCoreContext context = new LFAdminCoreContext() )
             {
                 var list = context.TUser.ToList();
+                int counts = list.Count(); 
             }
             return View();
         }

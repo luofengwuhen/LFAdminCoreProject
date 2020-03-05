@@ -5,18 +5,46 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Config\**" />
+    <Compile Remove="Log4net\**" />
+    <Compile Remove="Logs\**" />
+    <Content Remove="Config\**" />
+    <Content Remove="Log4net\**" />
+    <Content Remove="Logs\**" />
+    <EmbeddedResource Remove="Config\**" />
+    <EmbeddedResource Remove="Log4net\**" />
+    <EmbeddedResource Remove="Logs\**" />
+    <None Remove="Config\**" />
+    <None Remove="Log4net\**" />
+    <None Remove="Logs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Services\ILoggerHelper.cs" />
+    <Compile Remove="Services\LoggerHelper.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove=".gitignore" />
     <None Remove="LFAdmin.pdb" />
     <None Remove="LFAdmin.pdm" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="log4net" Version="2.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="3.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 
