@@ -29,6 +29,8 @@ namespace LFAdminCoreProject.Controllers
 
             Utility.Log4netHelper.Error("这是一条测试 Error");
 
+            //throw new Exception("这是一条测试 Error");
+
             using (LFAdminCoreContext context = new LFAdminCoreContext() )
             {
                 var list = context.TUser.ToList();

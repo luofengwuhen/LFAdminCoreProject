@@ -1,3 +1,4 @@
+using LFAdminCoreProject.Filters;
 using log4net;
 using log4net.Config;
 using log4net.Repository;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
+using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace LFAdminCoreProject
 {
@@ -37,7 +39,15 @@ namespace LFAdminCoreProject
 
             //加载log4net配置
             Utility.Log4netHelper.Repository = LogManager.CreateRepository("NETCoreRepository");
-            XmlConfigurator.Configure(Utility.Log4netHelper.Repository, new FileInfo(Environment.CurrentDirectory + "/log4net.config")); 
+            XmlConfigurator.Configure(Utility.Log4netHelper.Repository, new FileInfo(Environment.CurrentDirectory + "/log4net.config"));
+
+            //全局注册filter
+            services.AddMvc(config =>
+            {
+                config.Filters.Add(new ActionFilter());
+                config.Filters.Add(new ExceptionFilter());
+                config.Filters.Add(new AuthorizationFilter());
+            }).AddRazorRuntimeCompilation();//修改cshtml之后可以直接刷新生效  
 
             services.AddControllersWithViews();
         }
@@ -46,7 +56,7 @@ namespace LFAdminCoreProject
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory logger) 
         {
 
-            logger.AddLog4Net();
+            logger.AddLog4Net();//log4net 注入
 
             if (env.IsDevelopment())
             {
@@ -56,6 +66,8 @@ namespace LFAdminCoreProject
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            
             app.UseStaticFiles(); 
 
             app.UseRouting();
@@ -66,7 +78,7 @@ namespace LFAdminCoreProject
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Login}/{action=Index}");
             });
         }
     }

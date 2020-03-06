@@ -1,22 +1,15 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.Configuration;
-
 
 namespace LFAdminCoreProject.Models
 {
     public partial class LFAdminCoreContext : DbContext
     {
-        private readonly IConfiguration configuration;
-
         public LFAdminCoreContext()
         {
         }
-        public LFAdminCoreContext(IConfiguration Configuration)
-        {
-            configuration = Configuration;
-        }
+
         public LFAdminCoreContext(DbContextOptions<LFAdminCoreContext> options)
             : base(options)
         {
@@ -25,6 +18,7 @@ namespace LFAdminCoreProject.Models
         public virtual DbSet<TAuthority> TAuthority { get; set; }
         public virtual DbSet<TRole> TRole { get; set; }
         public virtual DbSet<TRoleAuthority> TRoleAuthority { get; set; }
+        public virtual DbSet<TSmsLog> TSmsLog { get; set; }
         public virtual DbSet<TUser> TUser { get; set; }
         public virtual DbSet<TUserRole> TUserRole { get; set; }
 
@@ -34,8 +28,7 @@ namespace LFAdminCoreProject.Models
             {
                 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 //                optionsBuilder.UseSqlServer("Data Source=DESKTOP-B1B83D0\\MSSQLSERVER2;Initial Catalog=LFAdminCore;persist security info=True;user id=sa;password=Yujie123;");
-                //optionsBuilder.UseSqlServer(configuration.GetConnectionString("LFAdminCoreContextConnectionStrRead")); //需要注入才能使用
-                optionsBuilder.UseSqlServer(Startup.LFAdminCoreContextConnectionStr);//读取配置文件
+                optionsBuilder.UseSqlServer(Startup.LFAdminCoreContextConnectionStr);
             }
         }
 
@@ -130,6 +123,50 @@ namespace LFAdminCoreProject.Models
                 entity.Property(e => e.RoleId)
                     .HasColumnName("RoleID")
                     .HasComment("角色ID");
+            });
+
+            modelBuilder.Entity<TSmsLog>(entity =>
+            {
+                entity.ToTable("T_Sms_Log");
+
+                entity.HasComment("短信验证码记录表");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .HasComment("ID");
+
+                entity.Property(e => e.ApplyTime)
+                    .HasColumnType("datetime")
+                    .HasComment("申请时间");
+
+                entity.Property(e => e.CellPhone)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasComment("手机号码");
+
+                entity.Property(e => e.LostTime)
+                    .HasColumnType("datetime")
+                    .HasComment("失效时间");
+
+                entity.Property(e => e.ResultCode)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasComment("返回code");
+
+                entity.Property(e => e.ResultMemo)
+                    .HasMaxLength(500)
+                    .IsUnicode(false)
+                    .HasComment("返回结果");
+
+                entity.Property(e => e.UseFor)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasComment("用途");
+
+                entity.Property(e => e.VerificationCode)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasComment("验证码");
             });
 
             modelBuilder.Entity<TUser>(entity =>
