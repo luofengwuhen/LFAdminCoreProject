@@ -189,7 +189,7 @@ namespace LFAdminCoreProject.Models
                     .HasComment("停用时间");
 
                 entity.Property(e => e.ChineseName)
-                    .HasColumnName("Chinese_Name")
+                    .HasColumnName("ChineseName")
                     .HasMaxLength(200)
                     .IsUnicode(false)
                     .HasComment("姓名");
@@ -225,7 +225,7 @@ namespace LFAdminCoreProject.Models
                     .HasComment("手机");
 
                 entity.Property(e => e.UserName)
-                    .HasColumnName("User_Name")
+                    .HasColumnName("UserName")
                     .HasMaxLength(50)
                     .IsUnicode(false)
                     .HasComment("用户名");

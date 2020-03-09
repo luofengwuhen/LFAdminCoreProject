@@ -7,6 +7,8 @@
     var aCode = sCode.split(",");
     var aLength = aCode.length;//获取到数组的长度
 
+    
+
     for (var i = 0; i <= 3; i++) {
         var j = Math.floor(Math.random() * aLength);//获取到随机的索引值
         var deg = Math.random() * 30 * Math.PI / 180;//产生0~30之间的随机弧度

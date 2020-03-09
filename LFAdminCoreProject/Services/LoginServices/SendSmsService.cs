@@ -24,6 +24,46 @@ namespace LFAdminCoreProject.Services.LoginServices
             return code;
         }
 
+        /// <summary>
+        /// 是否频繁注册
+        /// </summary>
+        /// <param name="cellPhone"></param>
+        /// <returns></returns>
+        public bool IsConstantlyRegister(string cellPhone)
+        {
+            //从注册日志里查询半个小时内是否有连续注册的情况
+            using (LFAdminCoreContext context = new LFAdminCoreContext())
+            {
+                var list = context.TSmsLog.Where(o => o.CellPhone == cellPhone && o.LostTime> DateTime.Now).ToList();
+                if(list.Count>2)
+                { 
+                    return true;
+                }
+            }
+            return false;
+        }
+        //判断手机号是否已经注册
+        public bool IsHasRegister(string cellPhone)
+        {
+            using (LFAdminCoreContext context = new LFAdminCoreContext())
+            {
+                var model = context.TUser.Where(o => o.Phone == cellPhone).FirstOrDefault();
+                if (model!=null)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        //是否本集团员工
+        public bool IsJgEmployee(string cellPhone)
+        {
+
+            return true;
+        }
+
+        //发送验证码，并记录到日志
         public ReturnViewModel SendSms(string cellPhone)
         {
             IClientProfile profile = DefaultProfile.GetProfile("cn-hangzhou", Utility.AliSendSmsStrings.AccessKeyId, Utility.AliSendSmsStrings.AccessSecret);
@@ -37,7 +77,7 @@ namespace LFAdminCoreProject.Services.LoginServices
             request.AddQueryParameters("PhoneNumbers", cellPhone);
             request.AddQueryParameters("SignName", Utility.AliSendSmsStrings.SignName);
             request.AddQueryParameters("TemplateCode", Utility.AliSendSmsStrings.TemplateCode);
-       
+
             string verCode = GetCode(4);
             request.AddQueryParameters("TemplateParam", "{\"code\":\"" + verCode + "\"}");
 
@@ -73,5 +113,7 @@ namespace LFAdminCoreProject.Services.LoginServices
 
             return model;
         }
+
+         
     }
 }

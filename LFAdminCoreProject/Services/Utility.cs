@@ -5,10 +5,40 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace Utility
 {
+    public class PasswordString
+    {
+        static string FixedString = "JGKGXXB"; 
+
+        /// <summary>
+        /// 密码加密
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public static string GenerateMD5(string password)
+        {
+            string fix = Utility.PasswordString.FixedString;
+            using (MD5 mi = MD5.Create())
+            {
+                byte[] buffer = Encoding.Default.GetBytes(fix + password);
+                //开始加密
+                byte[] newBuffer = mi.ComputeHash(buffer);
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < newBuffer.Length; i++)
+                {
+                    sb.Append(newBuffer[i].ToString("x2"));
+                }
+                return sb.ToString();
+            }
+        }
+    }
+   
+
+
     public class AliSendSmsStrings
     { 
         public static string AccessKeyId = "LTAI4FmsWcnVjchvbK2omNCJ";
