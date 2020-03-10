@@ -35,8 +35,10 @@ namespace Utility
                 {
                     sb.Append(newBuffer[i].ToString("x2"));
                 }
+                mi.Dispose();
                 return sb.ToString();
             }
+            
         }
     }
    

@@ -2,6 +2,7 @@
 using Aliyun.Acs.Core.Http;
 using Aliyun.Acs.Core.Profile;
 using LFAdminCoreProject.Models;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -34,7 +35,7 @@ namespace LFAdminCoreProject.Services.LoginServices
             //从注册日志里查询半个小时内是否有连续注册的情况
             using (LFAdminCoreContext context = new LFAdminCoreContext())
             {
-                var list = context.TSmsLog.Where(o => o.CellPhone == cellPhone && o.LostTime> DateTime.Now && o.UseFor==typeString).ToList();
+                var list = context.TSmsLog.AsNoTracking().Where(o => o.CellPhone == cellPhone && o.LostTime> DateTime.Now && o.UseFor==typeString).ToList();
                 if(list.Count>2)
                 { 
                     return true;
@@ -47,7 +48,7 @@ namespace LFAdminCoreProject.Services.LoginServices
         {
             using (LFAdminCoreContext context = new LFAdminCoreContext())
             {
-                var model = context.TUser.Where(o => o.Phone == cellPhone).FirstOrDefault();
+                var model = context.TUser.AsNoTracking().Where(o => o.Phone == cellPhone).FirstOrDefault();
                 if (model!=null)
                 {
                     return true;

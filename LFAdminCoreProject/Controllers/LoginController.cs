@@ -11,6 +11,7 @@ using Aliyun.Acs.Core.Http;
 using LFAdminCoreProject.Services.LoginServices;
 using Newtonsoft.Json;
 using System.Diagnostics;
+using LFAdminCoreProject.Services.Infrastructure;
 
 namespace LFAdminCoreProject.Controllers
 {
@@ -34,28 +35,24 @@ namespace LFAdminCoreProject.Controllers
         public IActionResult ForgetUser(string cellphone,string password,string vercode)
         {
             //1.判断验证码是否正确 
-            IRegisterUser _IRU = new RegisterUser(); 
-            ReturnViewModel model = new ReturnViewModel();
+            IRegisterUser _IRU = new RegisterUser();  
             if (!_IRU.IsVeryCode(vercode, cellphone, Utility.Constant.ResetName)) //不正确
-            {
-                model.Code = 1;
-                model.Msg = "验证码已过期或输入有误，请检查";
-                return Json(model);
+            { 
+                return ReturnMethod.ReturnWarning(1, "验证码已过期或输入有误，请检查");
             }
 
             //2.密码重置
             IForgetUser _IFU = new ForgetUser();
-            model = _IFU.ForgetUser(cellphone, password);
+            ReturnViewModel model = _IFU.ForgetUser(cellphone, password);
 
             return Json(model); 
         }
 
         public IActionResult Login(string username,string password)
-        {
-            ReturnViewModel model = new ReturnViewModel();
+        { 
             //登录是否成功
             ILogin _IL = new Login();
-            model = _IL.LoginOn(username, password);
+            ReturnViewModel model = _IL.LoginOn(username, password);
 
             //model.Data.Access_token = "";//access_token
             return Json(model);
@@ -63,18 +60,15 @@ namespace LFAdminCoreProject.Controllers
 
         public IActionResult SendSms(string cellphone,string typeString)
         { 
-            ISendSmsService _ISS = new SendSmsService();
-            ReturnViewModel model = new ReturnViewModel();
+            ISendSmsService _ISS = new SendSmsService(); 
             string TemplateCode = "";
             //1.判断手机号是否为员工号码，否则不与发送  测试实例不需要判断 
             if (typeString.Equals(Utility.Constant.RegisterName))
             {
                 //2.判断手机号是否已经注册
                 if (_ISS.IsHasRegister(cellphone))
-                {
-                    model.Code = 1;
-                    model.Msg = "该手机号已经注册，如忘记密码，请点击 <a href='/Login/Forget'>忘记密码</a> 进行密码重置";
-                    return Json(model);
+                { 
+                    return ReturnMethod.ReturnWarning(1, "该手机号已经注册，如忘记密码，请点击 <a href='/Login/Forget'>忘记密码</a> 进行密码重置");
                 }
                 TemplateCode = Utility.AliSendSmsStrings.RegisterTemplateCode;
             }
@@ -82,29 +76,23 @@ namespace LFAdminCoreProject.Controllers
             {
                 //2.判断手机号是否已经注册
                 if (!_ISS.IsHasRegister(cellphone))
-                {
-                    model.Code = 1;
-                    model.Msg = "该手机号未注册，请点击 <a href='/Login/Register'>注册帐号</a> 进行密码重置";
-                    return Json(model);
+                { 
+                    return ReturnMethod.ReturnWarning(1, "该手机号未注册，请点击 <a href='/Login/Register'>注册帐号</a> 进行密码重置");
                 }
                 TemplateCode = Utility.AliSendSmsStrings.ResetTemplateCode;
             }
             else
-            {
-                model.Code = 1;
-                model.Msg = "系统出错，请刷新页面后重试";
-                return Json(model);
+            { 
+                return ReturnMethod.ReturnWarning(1, "系统出错，请刷新页面后重试");
             }
            
             //3.判断是否频繁注册
             if (_ISS.IsConstantlyRegister(cellphone, typeString))
-            {
-                model.Code = 1;
-                model.Msg = "请查验是否已收到验证码，验证码30分钟内有效，请勿频繁注册";
-                return Json(model);
+            { 
+                return ReturnMethod.ReturnWarning(1, "请查验是否已收到验证码，验证码30分钟内有效，请勿频繁注册");
             }
             //4.发送 验证码短信，并把发送记录写入
-            model = _ISS.SendSms(cellphone, typeString, TemplateCode);  
+            ReturnViewModel model = _ISS.SendSms(cellphone, typeString, TemplateCode);  
 
             return Json(model);
         }
@@ -112,17 +100,14 @@ namespace LFAdminCoreProject.Controllers
         public IActionResult RegisterUser(string cellphone, string password, string nickname, string vercode)
         {  
             //1.判断验证码是否正确 
-            IRegisterUser _IRU = new RegisterUser();
-            ReturnViewModel model = new ReturnViewModel();
+            IRegisterUser _IRU = new RegisterUser(); 
             if (!_IRU.IsVeryCode(vercode,cellphone, Utility.Constant.RegisterName)) //不正确
-            {
-                model.Code = 1;
-                model.Msg = "验证码已过期或输入有误，请检查";
-                return Json(model);
+            { 
+                return ReturnMethod.ReturnWarning(1, "验证码已过期或输入有误，请检查");
             }
 
             //2.注册加密 
-            model = _IRU.RegisterUser(cellphone, password, nickname);
+            ReturnViewModel model = _IRU.RegisterUser(cellphone, password, nickname);
 
             return Json(model);
         }

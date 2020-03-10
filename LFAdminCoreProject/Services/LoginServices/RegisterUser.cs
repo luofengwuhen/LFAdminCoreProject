@@ -1,4 +1,5 @@
 ﻿using LFAdminCoreProject.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,7 +52,7 @@ namespace LFAdminCoreProject.Services.LoginServices
         {
             using (LFAdminCoreContext context = new LFAdminCoreContext())
             {
-                var model = context.TSmsLog.Where(o => o.CellPhone == cellPhone && o.LostTime > DateTime.Now && o.VerificationCode==veryCode && o.UseFor==typeString) .FirstOrDefault();
+                var model = context.TSmsLog.AsNoTracking().Where(o => o.CellPhone == cellPhone && o.LostTime > DateTime.Now && o.VerificationCode==veryCode && o.UseFor==typeString) .FirstOrDefault();
                 if (model!=null)
                 {
                     return true;

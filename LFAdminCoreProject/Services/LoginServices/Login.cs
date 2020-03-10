@@ -1,4 +1,5 @@
 ﻿using LFAdminCoreProject.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace LFAdminCoreProject.Services.LoginServices
             ReturnViewModel model = new ReturnViewModel();
             using (LFAdminCoreContext context = new LFAdminCoreContext())
             {
-                var user = context.TUser.Where(o => o.UserName == username && o.Password == Utility.PasswordString.GenerateMD5(password)).FirstOrDefault();
+                var user = context.TUser.AsNoTracking().Where(o => o.UserName == username && o.Password == Utility.PasswordString.GenerateMD5(password)).FirstOrDefault();
 
                 if (user!=null)
                 {
