@@ -10,6 +10,9 @@ using System.Text;
 
 namespace Utility
 {
+    /// <summary>
+    /// 密码
+    /// </summary>
     public class PasswordString
     {
         static string FixedString = "JGKGXXB"; 
@@ -38,14 +41,22 @@ namespace Utility
     }
    
 
-
+    /// <summary>
+    /// 阿里短信
+    /// </summary>
     public class AliSendSmsStrings
     { 
         public static string AccessKeyId = "LTAI4FmsWcnVjchvbK2omNCJ";
         public static string AccessSecret = "TBdxk6B71tLeNmTpdKkq5qeyf3SC8w";
         public static string SignName = "精工控股集团有限公司";
-        public static string TemplateCode = "SMS_176880333"; //注册验证码模板
+        public static string RegisterTemplateCode = "SMS_176880333"; //注册验证码模板
+        public static string ResetTemplateCode = "SMS_176880332"; //重置密码验证码模板
+    }
 
+    public class Constant
+    {
+        public static string RegisterName="注册";
+        public static string ResetName = "密码找回";
     }
 
     /// <summary>

@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace LFAdminCoreProject.Services.LoginServices
 {
-    interface IRegisterUser
+    interface IForgetUser
     {
-        ReturnViewModel RegisterUser(string cellPhone,string password,string Chinese_Name);
-        bool IsVeryCode(string veryCode, string cellPhone, string typeString);
+        ReturnViewModel ForgetUser(string cellPhone, string password);
     }
 }

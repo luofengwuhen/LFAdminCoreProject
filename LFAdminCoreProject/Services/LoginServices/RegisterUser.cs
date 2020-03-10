@@ -47,11 +47,11 @@ namespace LFAdminCoreProject.Services.LoginServices
         /// <param name="veryCode"></param>
         /// <param name="cellPhone"></param>
         /// <returns></returns>
-        public bool IsVeryCode(string veryCode,string cellPhone)
+        public bool IsVeryCode(string veryCode,string cellPhone,string typeString )
         {
             using (LFAdminCoreContext context = new LFAdminCoreContext())
             {
-                var model = context.TSmsLog.Where(o => o.CellPhone == cellPhone && o.LostTime > DateTime.Now && o.VerificationCode==veryCode).FirstOrDefault();
+                var model = context.TSmsLog.Where(o => o.CellPhone == cellPhone && o.LostTime > DateTime.Now && o.VerificationCode==veryCode && o.UseFor==typeString) .FirstOrDefault();
                 if (model!=null)
                 {
                     return true;

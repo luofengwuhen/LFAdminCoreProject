@@ -25,16 +25,16 @@ namespace LFAdminCoreProject.Services.LoginServices
         }
 
         /// <summary>
-        /// 是否频繁注册
+        /// 是否频繁 获取验证码 最多3次
         /// </summary>
         /// <param name="cellPhone"></param>
         /// <returns></returns>
-        public bool IsConstantlyRegister(string cellPhone)
+        public bool IsConstantlyRegister(string cellPhone,string typeString)
         {
             //从注册日志里查询半个小时内是否有连续注册的情况
             using (LFAdminCoreContext context = new LFAdminCoreContext())
             {
-                var list = context.TSmsLog.Where(o => o.CellPhone == cellPhone && o.LostTime> DateTime.Now).ToList();
+                var list = context.TSmsLog.Where(o => o.CellPhone == cellPhone && o.LostTime> DateTime.Now && o.UseFor==typeString).ToList();
                 if(list.Count>2)
                 { 
                     return true;
@@ -64,7 +64,7 @@ namespace LFAdminCoreProject.Services.LoginServices
         }
 
         //发送验证码，并记录到日志
-        public ReturnViewModel SendSms(string cellPhone)
+        public ReturnViewModel SendSms(string cellPhone,string typeString,string TemplateCode)
         {
             IClientProfile profile = DefaultProfile.GetProfile("cn-hangzhou", Utility.AliSendSmsStrings.AccessKeyId, Utility.AliSendSmsStrings.AccessSecret);
             DefaultAcsClient client = new DefaultAcsClient(profile);
@@ -76,7 +76,7 @@ namespace LFAdminCoreProject.Services.LoginServices
             // request.Protocol = ProtocolType.HTTP;
             request.AddQueryParameters("PhoneNumbers", cellPhone);
             request.AddQueryParameters("SignName", Utility.AliSendSmsStrings.SignName);
-            request.AddQueryParameters("TemplateCode", Utility.AliSendSmsStrings.TemplateCode);
+            request.AddQueryParameters("TemplateCode", TemplateCode);
 
             string verCode = GetCode(4);
             request.AddQueryParameters("TemplateParam", "{\"code\":\"" + verCode + "\"}");
@@ -90,7 +90,7 @@ namespace LFAdminCoreProject.Services.LoginServices
             {
                 TSmsLog log = new TSmsLog();
                 log.CellPhone = cellPhone;
-                log.UseFor = "注册";
+                log.UseFor = typeString;
                 log.ResultCode = data.Code;
                 log.ApplyTime = DateTime.Now;
                 log.ResultMemo = data.Message;

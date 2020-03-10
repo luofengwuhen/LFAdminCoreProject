@@ -79,20 +79,16 @@
           $.ajax({
                 'type': 'post',
                 'url': '/Login/SendSms',
-                'data': { cellphone: cellphone },
+                'data': { cellphone: cellphone,typeString:"注册" },
                 success: function (data) { 
                     if (data.code == 0) {  
                         
                     }
                     else {
-                        layer.msg( data.msg); 
+                        layer.alert( data.msg); 
                         return false;
                     } 
-                },
-              error: function (message) {
-                  layer.msg(JSON.stringify(message.statusText));
-                    return false;
-                }
+                } 
           });
    });
 

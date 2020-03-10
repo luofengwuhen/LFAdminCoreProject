@@ -8,11 +8,11 @@ namespace LFAdminCoreProject.Services.LoginServices
 {
     interface ISendSmsService
     {  
-        ReturnViewModel SendSms(string cellPhone);
+        ReturnViewModel SendSms(string cellPhone,string typeString,string TemplateCode);
 
         //bool IsJgEmployee(string cellPhone);
 
-        bool IsConstantlyRegister(string cellPhone);
+        bool IsConstantlyRegister(string cellPhone, string typeString);
         bool IsHasRegister(string cellPhone);
     }
 }
