@@ -69,10 +69,10 @@
                 return false;
             }
             //请求接口
-            $.ajax({
-                'type': 'post',
-                'url': '/Login/SendSms',
-                'data': { cellphone: cellphone ,typeString:"重置密码"},
+            admin.req({
+                type: 'post',
+                 url:  '/Login/SendSms',
+                data: { cellphone: cellphone ,typeString:"重置密码"},
                 success: function (data) {
                     if (data.code == 0) {
 

@@ -59,7 +59,7 @@ namespace LFAdminCoreProject.Controllers
         }
         public IActionResult Search()
         {
-            return View();
+            return Content("");
         } 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

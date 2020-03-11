@@ -51,6 +51,9 @@
                                 <i class="layui-icon layui-icon-screen-full"></i>
                             </a>
                         </li>
+                        <li  class="layui-nav-item" lay-unselect>
+                            <button id="testButton">测试按钮</button>
+                        </li>
                         <li class="layui-nav-item" lay-unselect>
                             <a href="javascript:;">
                                 <cite>贤心</cite>
@@ -58,7 +61,7 @@
                             <dl class="layui-nav-child">
                                 <dd><a lay-href="User/Info">基本资料</a></dd>
                                 <dd><a lay-href="User/Password">修改密码</a></dd>
-                                <hr> 
+                                <hr>
                                 <dd layadmin-event="logout" style="text-align: center;"><a>退出</a></dd>
                             </dl>
                         </li>
@@ -426,7 +429,7 @@
                     </div>
                     <div class="layui-tab" lay-unauto lay-allowClose="true" lay-filter="layadmin-layout-tabs">
                         <ul class="layui-tab-title" id="LAY_app_tabsheader">
-                            <li lay-id="/Home/Console" lay-attr="/Home/Console" class="layui-this"><i class="layui-icon layui-icon-home"></i></li>
+                            <li lay-id="Console" lay-attr="/Home/Console" class="layui-this"><i class="layui-icon layui-icon-home"></i></li>
                         </ul>
                     </div>
                 </div>
@@ -441,16 +444,36 @@
 
                 <!-- 辅助元素，一般用于移动设备下遮罩 -->
                 <div class="layadmin-body-shade" layadmin-event="shade"></div>
+               
             </div>
         </div> 
-
+        @*<script src="~/lib/jquery/dist/jquery.js"></script>*@
 <script>  
+      layui.config({
+        base: '../layuiadmin/lib/'
+      }).use(['index', 'user'], function () {
+        
+        var  $ = layui.$,setter = layui.setter
+            , admin = layui.admin
+            , form = layui.form
+            , router = layui.router();
+ 
+   
 
-    layui.use(['layer', 'form'], function(){
-      var layer = layui.layer
-      ,form = layui.form;
-  
-      //layer.msg('Hello World');
+          $("#testButton").on('click', function () {
+              //layer.msg(layui.data(layui.setter.tableName)['Access_Token']);
+             //请求接口
+            admin.req({
+                url: '/Home/Search' //实际使用请改成服务端真实接口
+                , data: {}
+                //, headers: {"access_token":layui.data(layui.setter.tableName)['Access_Token']}
+                , done: function (res) {
+                    layer.msg('操作成功');
+                }
+            }); 
+         
+        })
+
     });
 </script>
  

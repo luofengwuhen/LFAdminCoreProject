@@ -11,17 +11,25 @@
 
   <ItemGroup>
     <Compile Remove="Config\**" />
+    <Compile Remove="layuiAdmin.v1.2.1后台模板iframe版\**" />
     <Compile Remove="Log4net\**" />
     <Compile Remove="Logs\**" />
+    <Compile Remove="Services\Aliyun\**" />
     <Content Remove="Config\**" />
+    <Content Remove="layuiAdmin.v1.2.1后台模板iframe版\**" />
     <Content Remove="Log4net\**" />
     <Content Remove="Logs\**" />
+    <Content Remove="Services\Aliyun\**" />
     <EmbeddedResource Remove="Config\**" />
+    <EmbeddedResource Remove="layuiAdmin.v1.2.1后台模板iframe版\**" />
     <EmbeddedResource Remove="Log4net\**" />
     <EmbeddedResource Remove="Logs\**" />
+    <EmbeddedResource Remove="Services\Aliyun\**" />
     <None Remove="Config\**" />
+    <None Remove="layuiAdmin.v1.2.1后台模板iframe版\**" />
     <None Remove="Log4net\**" />
     <None Remove="Logs\**" />
+    <None Remove="Services\Aliyun\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,11 +48,13 @@
     <PackageReference Include="aliyun-net-sdk-core" Version="1.5.3" />
     <PackageReference Include="log4net" Version="2.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Caching.Redis" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="3.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
   </ItemGroup>

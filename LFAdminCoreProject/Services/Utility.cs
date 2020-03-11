@@ -1,4 +1,6 @@
 ﻿
+using LFAdminCoreProject;
+using LFAdminCoreProject.Services.Cache;
 using log4net;
 using log4net.Repository;
 using System;
@@ -15,7 +17,7 @@ namespace Utility
     /// </summary>
     public class PasswordString
     {
-        static string FixedString = "JGKGXXB"; 
+        static string FixedString = "JGKGXXB";
 
         /// <summary>
         /// 密码加密
@@ -38,10 +40,23 @@ namespace Utility
                 mi.Dispose();
                 return sb.ToString();
             }
-            
+
         }
     }
-   
+
+    public class AccessToken { 
+        public static string AccessTokenName =  "access_token";
+        /// <summary>
+        /// 生成token
+        /// </summary>
+        /// <returns></returns>
+        public static string GetAccessToken()
+        {
+            string str = Guid.NewGuid().ToString().ToUpper().Replace("-", ""); 
+           
+            return str;
+        }
+    }
 
     /// <summary>
     /// 阿里短信

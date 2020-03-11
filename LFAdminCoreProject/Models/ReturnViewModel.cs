@@ -17,7 +17,7 @@ namespace LFAdminCoreProject.Models
     }
     public class DataModel
     {
-        public string Access_token  { get; set; }
+        public string access_token  { get; set; }
     }
 
 

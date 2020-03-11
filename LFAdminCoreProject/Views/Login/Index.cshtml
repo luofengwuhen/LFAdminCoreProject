@@ -13,11 +13,11 @@
         <div class="layadmin-user-login-box layadmin-user-login-body layui-form" style="background-color:white">
             <div class="layui-form-item">
                 <label class="layadmin-user-login-icon layui-icon layui-icon-username" for="LAY-user-login-username"></label>
-                <input type="text" name="username" id="LAY-user-login-username" lay-verify="required" placeholder="手机号" class="layui-input">
+                <input type="text" name="username" id="LAY-user-login-username" lay-verify="required" placeholder="手机号" value="13757519621" class="layui-input"> 
             </div>
             <div class="layui-form-item">
                 <label class="layadmin-user-login-icon layui-icon layui-icon-password" for="LAY-user-login-password"></label>
-                <input type="password" name="password" id="LAY-user-login-password" lay-verify="required" placeholder="密码" class="layui-input">
+                <input type="password" name="password" id="LAY-user-login-password" lay-verify="required" placeholder="密码"  value="luofeng123" class="layui-input">
             </div>
             <div class="layui-form-item">
                 <div class="layui-row">
@@ -97,14 +97,14 @@
                 , data: {username:obj.field.username,password:obj.field.password}
                 , done: function (res) {
 
-                    //请求成功后，写入 access_token
-                    //layui.data(setter.tableName, {
-                    //    key: setter.request.tokenName
-                    //    , value: res.data.access_token
-                    //});
-
-                    //登入成功的提示与跳转
-                    layer.msg('登入成功', {
+                    //请求成功后，写入 access_token 到本地缓存，用sessionData 会话关闭之后删除，用data永久保存
+                    layui.data(setter.tableName, {
+                        key: setter.request.tokenName
+                        , value: res.data.access_token
+                    });
+                     
+                    //登入成功的提示与跳转   layui.data(layui.setter.tableName)['Access_Token']
+                    layer.msg( '登入成功', {
                         offset: '15px'
                         , icon: 1
                         , time: 1000
