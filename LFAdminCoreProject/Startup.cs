@@ -49,7 +49,7 @@ namespace LFAdminCoreProject
             services.AddSession(options =>
             {
                 // Set a short timeout for easy testing.
-                options.IdleTimeout = TimeSpan.FromMinutes(30); //30分钟  确定放弃服务器缓存中的内容前，内容可以空闲多长时间 此属性独立于 Cookie 到期时间。 通过会话中间件传递的每个请求都会重置超时
+                options.IdleTimeout = TimeSpan.FromMinutes(30);//.FromSeconds(5); //30分钟  确定放弃服务器缓存中的内容前，内容可以空闲多长时间 此属性独立于 Cookie 到期时间。 通过会话中间件传递的每个请求都会重置超时
                 options.Cookie.HttpOnly = true;
                 // Make the session cookie essential
                 options.Cookie.IsEssential = true;
@@ -58,10 +58,13 @@ namespace LFAdminCoreProject
             //全局注册filter
             services.AddMvc(config =>
             {
-                config.Filters.Add(new ActionFilter());
-                config.Filters.Add(new ExceptionFilter());
-                config.Filters.Add(new AuthorizationFilter());
-            }).AddRazorRuntimeCompilation();//修改cshtml之后可以直接刷新生效  
+                config.Filters.Add(new MyActionFilter());
+                config.Filters.Add(new MyExceptionFilter());
+                config.Filters.Add(new MyAuthorizationFilter() );
+                config.Filters.Add(new CheckLoginFilter() { IsCheck=true}); 
+            }); 
+
+            services.AddMvc().AddRazorRuntimeCompilation();//修改cshtml之后可以直接刷新生效  
 
             //添加redis配置
             //services.AddStackExchangeRedisCache(options =>
@@ -81,7 +84,7 @@ namespace LFAdminCoreProject
             services.AddSingleton<IRegisterUser, RegisterUser>();
             services.AddSingleton<ISendSmsService, SendSmsService>();
 
-            ServiceContext.RegisterServices(services);
+            ServiceContext.RegisterServices(services); //注册到类里，方便调用
             #endregion
             services.AddControllersWithViews();
         }
@@ -103,7 +106,7 @@ namespace LFAdminCoreProject
 
             
             app.UseStaticFiles();
-            app.UseSession();
+            app.UseSession();//使用session
             app.UseRouting();
 
             app.UseAuthorization();

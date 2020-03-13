@@ -25,7 +25,7 @@ namespace LFAdminCoreProject.Services.Login
             using (LFAdminCoreContext context = new LFAdminCoreContext())
             {
                 TUser user = new TUser();
-                user.ChineseName = Chinese_Name;
+                user.ChineseName = string.IsNullOrEmpty(Chinese_Name)? cellPhone: Chinese_Name;
                 user.Password = Utility.PasswordString.GenerateMD5(password); //加密密码
                 user.Phone = cellPhone;
                 user.UserName = cellPhone;

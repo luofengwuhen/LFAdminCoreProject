@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 /// </summary>
 namespace LFAdminCoreProject.Filters
 { 
-    public class ExceptionFilter : IExceptionFilter
+    public class MyExceptionFilter : IExceptionFilter
     {
         public void OnException(ExceptionContext context)
         {

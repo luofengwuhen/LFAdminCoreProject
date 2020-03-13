@@ -106,6 +106,10 @@
                 return layer.msg('你必须同意用户协议才能注册');
             } 
 
+                      //加载遮罩
+            var mask = layer.load(1, {
+                shade: [0.5, '#000'] //0.1透明度的背景
+            });
             //请求接口
             admin.req({
                 url: '/Login/RegisterUser' //实际使用请改成服务端真实接口
@@ -120,7 +124,7 @@
                     });
                 }
             });
-
+              layer.close(mask);//关闭加载遮罩
             return false;
         });
     });

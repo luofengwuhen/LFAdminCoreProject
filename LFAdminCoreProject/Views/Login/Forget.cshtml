@@ -68,6 +68,11 @@
                 layer.msg('请输入正确的手机号!');
                 return false;
             }
+
+                            //加载遮罩
+            var mask = layer.load(1, {
+                shade: [0.5, '#000'] //0.1透明度的背景
+            });
             //请求接口
             admin.req({
                 type: 'post',
@@ -83,6 +88,7 @@
                     }
                 } 
             });
+             layer.close(mask);//关闭加载遮罩
         });
 
 
@@ -94,7 +100,9 @@
             if (field.password !== field.repass) {
                 return layer.msg('两次密码输入不一致');
             } 
-
+                var mask = layer.load(1, {
+                shade: [0.5, '#000'] //0.1透明度的背景
+            });
             //请求接口
             admin.req({
                 url:   '/Login/ForgetUser' //实际使用请改成服务端真实接口
@@ -109,7 +117,7 @@
                     });
                 }
             });
-
+            layer.close(mask);//关闭加载遮罩
             return false;
         });
 

@@ -59,8 +59,8 @@
                                 <cite>贤心</cite>
                             </a>
                             <dl class="layui-nav-child">
-                                <dd><a lay-href="User/Info">基本资料</a></dd>
-                                <dd><a lay-href="User/Password">修改密码</a></dd>
+                                <dd><a lay-href="/User/Info">基本资料</a></dd>
+                                <dd><a lay-href="/User/Password">修改密码</a></dd>
                                 <hr>
                                 <dd layadmin-event="logout" style="text-align: center;"><a>退出</a></dd>
                             </dl>
@@ -461,6 +461,10 @@
    
 
           $("#testButton").on('click', function () {
+                          //加载遮罩
+            var mask = layer.load(1, {
+                shade: [0.5, '#000'] //0.1透明度的背景
+            });
               //layer.msg(layui.data(layui.setter.tableName)['Access_Token']);
              //请求接口
             admin.req({
@@ -471,6 +475,7 @@
                     layer.msg('操作成功');
                 }
             }); 
+              layer.close(mask);//关闭加载遮罩
          
         })
 

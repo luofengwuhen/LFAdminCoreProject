@@ -6,14 +6,14 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace LFAdminCoreProject.Filters
 {
-    public class ActionFilter : IActionFilter
+    public class MyActionFilter : IActionFilter
     {
-        public void OnActionExecuted(ActionExecutedContext context)
+        public  void OnActionExecuted(ActionExecutedContext context)
         {
             //throw new NotImplementedException();
         }
 
-        public void OnActionExecuting(ActionExecutingContext context)
+        public  void OnActionExecuting(ActionExecutingContext context)
         {
             //throw new NotImplementedException();
         }

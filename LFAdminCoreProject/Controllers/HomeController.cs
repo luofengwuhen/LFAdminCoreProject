@@ -25,9 +25,9 @@ namespace LFAdminCoreProject.Controllers
 
         public IActionResult Index()
         {
-            Utility.Log4netHelper.Info("这是一条测试 Infomation");
+            //Utility.Log4netHelper.Info("这是一条测试 Infomation");
 
-            Utility.Log4netHelper.Error("这是一条测试 Error");
+            //Utility.Log4netHelper.Error("这是一条测试 Error");
 
             //throw new Exception("这是一条测试 Error");
 

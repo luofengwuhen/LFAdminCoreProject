@@ -14,10 +14,13 @@ using System.Diagnostics;
 using LFAdminCoreProject.Services.Infrastructure;
 using LFAdminCoreProject.Services.Cache;
 using StackExchange.Redis;
-using LFAdminCoreProject.Services.AliSms; 
+using LFAdminCoreProject.Services.AliSms;
+using System.Web.Http.Filters;
+using LFAdminCoreProject.Filters;
 
 namespace LFAdminCoreProject.Controllers
 {
+    [CheckLoginFilter(IsCheck = false)]
     public class LoginController : Controller
     {
         private readonly IForgetUser _forgetUser;
@@ -34,14 +37,14 @@ namespace LFAdminCoreProject.Controllers
             _login = login;
             _sendSmsService = sendSmsService;
         }
-
-        public IActionResult Index()
+     
+        public IActionResult Index() //(IsCheck = false)
         { 
             //string Access_token = Utility.AccessToken.GetAccessToken();
             //Redis.Add("Access_token", Access_token);
             return View();
         }
-
+   
         public IActionResult Register()
         {
             return View();
