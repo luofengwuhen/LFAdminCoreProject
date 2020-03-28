@@ -20,7 +20,7 @@ using LFAdminCoreProject.Filters;
 
 namespace LFAdminCoreProject.Controllers
 {
-    [CheckLoginFilter(IsCheck = false)]
+    //[ServiceFilter(typeof(CheckLoginFilter))]
     public class LoginController : Controller
     {
         private readonly IForgetUser _forgetUser;
@@ -77,7 +77,7 @@ namespace LFAdminCoreProject.Controllers
             {
                 //生成Access_token ，写入redis
                 string Access_token = Utility.AccessToken.GetAccessToken(); 
-                model.Data = new DataModel { access_token=Access_token };
+                model.Data = new { access_token=Access_token };
 
                 //_redis.Add(Utility.AccessToken.AccessTokenName, Access_token, 60);//写入redis
 

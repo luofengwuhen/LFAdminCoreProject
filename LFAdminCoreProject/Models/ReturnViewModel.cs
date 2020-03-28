@@ -12,13 +12,13 @@ namespace LFAdminCoreProject.Models
         /// </summary>
         public int Code { get; set; }   
         public string Msg { get; set; }
-        public DataModel Data { get; set; } 
+        public object Data { get; set; } 
          
     }
-    public class DataModel
-    {
-        public string access_token  { get; set; }
-    }
+    //public class DataModel
+    //{
+    //    public string access_token  { get; set; }
+    //}
 
 
 }

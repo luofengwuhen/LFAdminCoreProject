@@ -1,0 +1,9 @@
+1.NuGet管理器中引入log4net包
+2.复制log4net.config到项目根目录下
+3.复制Utility.cs文件到Services目录下
+4.Startup文件的ConfigureServices里写入语句：
+   //加载log4net配置
+   Utility.Log4netHelper.Repository = LogManager.CreateRepository("NETCoreRepository");
+   XmlConfigurator.Configure(Utility.Log4netHelper.Repository, new FileInfo(Environment.CurrentDirectory + "/log4net.config"));
+5.在文件中写入日志
+    Utility.Log4netHelper.Info("这是我的第一个提示信息");

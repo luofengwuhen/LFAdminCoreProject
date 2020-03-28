@@ -1,0 +1,14 @@
+1.全局化使用
+在Startup.cs的ConfigureServices里 写入：
+//全局注册filter
+services.AddMvc(config =>
+{
+    config.Filters.Add(new MyActionFilter());
+    config.Filters.Add(new MyExceptionFilter());
+    config.Filters.Add(new MyAuthorizationFilter() );
+    config.Filters.Add(new CheckLoginFilter() { IsCheck=true}); 
+});
+
+2.局部使用
+在controller里写入 
+ [CheckLoginFilter(IsCheck = false)]

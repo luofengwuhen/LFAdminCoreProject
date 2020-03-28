@@ -61,24 +61,30 @@ namespace LFAdminCoreProject
                 config.Filters.Add(new MyActionFilter());
                 config.Filters.Add(new MyExceptionFilter());
                 config.Filters.Add(new MyAuthorizationFilter() );
-                config.Filters.Add(new CheckLoginFilter() { IsCheck=true}); 
+                config.Filters.Add(typeof(CheckLoginFilter)); //{ IsCheck=true}
             }); 
 
             services.AddMvc().AddRazorRuntimeCompilation();//修改cshtml之后可以直接刷新生效  
 
-            //添加redis配置
+            #region redis 和sqlserver cache两者在于注册语句不同，其他使用都一样
+            //注册redis到全局 需要在NuGet里添加StackExchangeRedis包
             //services.AddStackExchangeRedisCache(options =>
             //{
             //    options.Configuration = Configuration.GetSection("Cache:ConnectionString").Value;
             //    options.InstanceName = Configuration.GetSection("Cache:InstanceName").Value;
             //});
-            #region 注册Redis服务，单例模式
-            InstanceName = Configuration.GetSection("Cache:InstanceName").Value;
-            services.AddSingleton(typeof(IRedisCacheService), new RedisCacheService(new RedisCacheOptions()
-            {
-                Configuration = Configuration.GetSection("Cache:ConnectionString").Value,
-                InstanceName = Configuration.GetSection("Cache:InstanceName").Value
-            }));
+
+            //注册SqlServerCache 到全局  需要在NuGet里添加Microsoft.Extensions.Caching.SqlServer包
+            // table可以自己建
+            //services.AddDistributedSqlServerCache(options =>
+            //{
+            //    options.ConnectionString = Configuration.GetSection("SQLCache:ConnectionString").Value;
+            //    options.SchemaName = "dbo";
+            //    options.TableName = Configuration.GetSection("SQLCache:Table").Value;
+            //});
+            #endregion
+            #region 注册 服务，单例模式
+
             services.AddSingleton<IForgetUser, ForgetUser>();
             services.AddSingleton<ILogin, Login>();
             services.AddSingleton<IRegisterUser, RegisterUser>();

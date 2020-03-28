@@ -36,7 +36,8 @@ namespace LFAdminCoreProject.Controllers
                 var list = context.TUser.ToList();
                 int counts = list.Count(); 
             }
-            return View();
+            //pro为单页版
+            return View("IndexPro"); //IndexIframe
         }
 
         public IActionResult Privacy()
