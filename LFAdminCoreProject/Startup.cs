@@ -68,11 +68,11 @@ namespace LFAdminCoreProject
 
             #region redis 和sqlserver cache两者在于注册语句不同，其他使用都一样
             //注册redis到全局 需要在NuGet里添加StackExchangeRedis包
-            //services.AddStackExchangeRedisCache(options =>
-            //{
-            //    options.Configuration = Configuration.GetSection("Cache:ConnectionString").Value;
-            //    options.InstanceName = Configuration.GetSection("Cache:InstanceName").Value;
-            //});
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = Configuration.GetSection("Cache:ConnectionString").Value;
+                options.InstanceName = Configuration.GetSection("Cache:InstanceName").Value;
+            });
 
             //注册SqlServerCache 到全局  需要在NuGet里添加Microsoft.Extensions.Caching.SqlServer包
             // table可以自己建
@@ -89,10 +89,14 @@ namespace LFAdminCoreProject
             services.AddSingleton<ILogin, Login>();
             services.AddSingleton<IRegisterUser, RegisterUser>();
             services.AddSingleton<ISendSmsService, SendSmsService>();
+            //services.AddSingleton<IRedisCacheService, RedisCacheService>();
+
 
             ServiceContext.RegisterServices(services); //注册到类里，方便调用
             #endregion
             services.AddControllersWithViews();
+
+            //services.AddLogging(); //
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

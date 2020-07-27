@@ -27,11 +27,11 @@ namespace LFAdminCoreProject.Controllers
         private readonly IRegisterUser _registerUser;
         private readonly ILogin _login;
         private readonly ISendSmsService _sendSmsService; 
-        public IRedisCacheService _redis { get; }
+        //public IRedisCacheService _redis { get; }
 
-        public LoginController(IRedisCacheService redis, IForgetUser forgetUser, IRegisterUser registerUser, ILogin login, ISendSmsService sendSmsService)
+        public LoginController( IForgetUser forgetUser, IRegisterUser registerUser, ILogin login, ISendSmsService sendSmsService)//IRedisCacheService redis,
         {
-            _redis = redis;
+            //_redis = redis;
             _forgetUser = forgetUser;
             _registerUser = registerUser;
             _login = login;
